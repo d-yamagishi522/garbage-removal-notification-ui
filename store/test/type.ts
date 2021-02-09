@@ -11,13 +11,16 @@ export interface RG {
 }
 
 export interface M {
+  setSample: string
 }
 
 export interface RM {
 }
 
 export interface A {
+  fetchTest: {}
 }
 
 export interface RA {
+  'test/fetchTest': A['fetchTest']
 }
