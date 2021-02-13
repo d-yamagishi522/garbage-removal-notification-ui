@@ -14,6 +14,7 @@ const config: NuxtConfig = {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
     ],
+    script: [{ src: 'https://static.line-scdn.net/liff/edge/2/sdk.js' }],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
@@ -25,14 +26,17 @@ const config: NuxtConfig = {
     firebaseStrageBucket: process.env.FIREBASE_STRAGE_BUCKET as string,
     firebaseMessagingSenderID: process.env.FIREBASE_MESSAGING_SENDER_ID as string,
     firebaseAppID: process.env.FIREBASE_APP_ID as string,
-    firebaseMeasurementID: process.env.FIREBASE_MEASUREMENT_ID as string
+    firebaseMeasurementID: process.env.FIREBASE_MEASUREMENT_ID as string,
+    liffId: process.env.LIFF_ID as string
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [
+    { src: '@/plugins/firebase' }
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
