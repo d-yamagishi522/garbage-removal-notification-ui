@@ -1,3 +1,5 @@
+import path from 'path'
+import fs from 'fs'
 import { NuxtConfig } from '@nuxt/types'
 
 const config: NuxtConfig = {
@@ -44,10 +46,20 @@ const config: NuxtConfig = {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
+  modules: [
+    '@nuxtjs/axios'
+  ],
+  axios: {
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+  server: {
+    https: {
+      key: fs.readFileSync(path.resolve(__dirname, 'localhost-key.pem')),
+      cert: fs.readFileSync(path.resolve(__dirname, 'localhost.pem'))
+    }
+  }
 }
 
 export default config
