@@ -1,17 +1,14 @@
 <template>
   <div
     class="fixed z-50 w-full h-full modal-mask inset-0"
-    @click="onClickMask"
+    @click="$emit('close')"
   >
     <div class="flex justify-center items-center h-full">
       <div
         class="bg-white rounded mx-4 break-words modal-container"
         @click.stop
       >
-        <div
-          v-if="closeButton"
-          class="flex flex-row-reverse pt-3 px-4"
-        >
+        <div class="flex flex-row-reverse pt-3 px-4">
           <img
             src="@/assets/icons/modal_cancel_icon.svg"
             class="cursor-pointer"
@@ -25,27 +22,10 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'nuxt-property-decorator'
+import { Vue, Component } from 'nuxt-property-decorator'
 
 @Component
 export default class BaseModal extends Vue {
-  @Prop({
-    type: Boolean,
-    default: false
-  })
-  readonly closeButton!: Boolean
-
-  @Prop({
-    type: Boolean,
-    default: false
-  })
-  readonly closeMask!: Boolean
-
-  onClickMask () {
-    if (this.closeMask) {
-      this.$emit('close')
-    }
-  }
 }
 </script>
 

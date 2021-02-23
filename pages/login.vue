@@ -1,5 +1,5 @@
 <template>
-  <div class="height pb-40 pt-40 bg-gradient">
+  <div class="height pb-40 pt-40">
       <div class="text-center font-bold text-2xl text-black">
         ゴミ出し通知botの管理画面
       </div>

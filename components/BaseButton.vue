@@ -16,8 +16,16 @@
 import { Vue, Prop, Component } from 'nuxt-property-decorator'
 @Component
 export default class BaseButton extends Vue {
-  @Prop({ type: String, default: '' }) readonly text!: string
-  @Prop({ type: String, default: 'h-10' }) readonly height!: string
+  @Prop({
+    type: String,
+    default: ''
+  })
+  readonly text!: string
+  @Prop({
+    type: String,
+    default: 'h-10'
+  })
+  readonly height!: string
 }
 </script>
 

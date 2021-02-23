@@ -1,11 +1,11 @@
 import 'vuex'
 
-import * as Test from '@/store/test/type'
+import * as Users from '@/store/users/type'
 
 type RootState = {
-  test: Test.S
+  users: Users.S
 }
 
-type RootGetters = Test.RG
-type RootMutations = Test.RM
-type RootActions = Test.RA
+type RootGetters = Users.RG
+type RootMutations = Users.RM
+type RootActions = Users.RA

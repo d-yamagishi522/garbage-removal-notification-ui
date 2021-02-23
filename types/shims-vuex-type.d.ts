@@ -1,10 +1,4 @@
-// shims-vuex.d.ts
-// Vuexが提供している型を継承し、新たにEXStoreを作成
-// 既存のAPI型を破壊せず、独自定義した型を追加していく
 import 'vuex'
-// import firebase, { firestore, auth } from 'firebase/app'
-
-// storeでthis.$axiosを使えるように
 declare module 'vuex' {
   interface Store<S> {
   }
