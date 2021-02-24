@@ -1,8 +1,8 @@
 <template>
   <div>
     <div
-      class="cursor-pointer flex justify-center items-center font-semibold btn text-white rounded border border-solid green"
-      :class="height"
+      class="cursor-pointer flex justify-center items-center font-semibold btn rounded border border-solid"
+      :class="[height, color]"
       @click="$emit('onClick')"
     >
       <div>
@@ -26,6 +26,11 @@ export default class BaseButton extends Vue {
     default: 'h-10'
   })
   readonly height!: string
+  @Prop({
+    type: String,
+    default: 'green'
+  })
+  readonly color!: string
 }
 </script>
 
@@ -38,5 +43,16 @@ export default class BaseButton extends Vue {
 .green {
   border-color: #00b900;
   background-color: #00b900;
+  color: white;
+}
+.red {
+  border-color: #ff4500;
+  background-color: #ff4500;
+  color: white;
+}
+.black {
+  border-color: #414141;
+  background-color: white;
+  color: #414141;
 }
 </style>

@@ -6,7 +6,7 @@
       @headerButton="logout()"
     />
     <div class="mx-2 mt-1">
-      <div v-if="isNotificated">
+      <div>
         <p class="font-semibold text-black">
           曜日毎に設定した内容が朝6時に通知されます。
         </p>
@@ -18,6 +18,7 @@
             <BaseButton
               :text="isNotificated ? '停止' : '再開'"
               height="h-6"
+              :color="isNotificated ? 'red' : 'green'"
               class="w-10 text-xs"
               @onClick="showNotificateModal = true"
             />
@@ -93,9 +94,11 @@ export default class index extends Vue {
 
   async mounted() {
     if (!liff.id) {
+      // liffの初期化
       await liff.init({ liffId: process.env.liffId as string })
     }
     if (!liff.isLoggedIn()) {
+      // ログインしてない場合ログイン画面にリダイレクト
       this.$router.push('/login')
     } else {
       const context: any = await liff.getContext()
