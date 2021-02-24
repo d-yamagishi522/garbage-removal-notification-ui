@@ -44,7 +44,7 @@ import BaseButton from '@/components/BaseButton.vue'
     BaseButton
   }
 })
-export default class TheHeader extends Vue {
+export default class TheConfirmationModal extends Vue {
   @Prop({
     type: Boolean,
     required: true

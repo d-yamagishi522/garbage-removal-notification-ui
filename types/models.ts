@@ -1,4 +1,9 @@
 export interface Garbage {
-  garbage: string
+  str: string
   weekday: string
+}
+
+export interface Document {
+  isNotificated: boolean
+  days: Garbage[]
 }

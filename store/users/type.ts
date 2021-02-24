@@ -28,9 +28,11 @@ export interface RM {
 export interface A {
   fetchUser: void
   updateIsNotificated: void
+  setData: void
 }
 
 export interface RA {
   'users/fetchUser': A['fetchUser']
   'users/updateIsNotificated': A['updateIsNotificated']
+  'users/setData': A['setData']
 }

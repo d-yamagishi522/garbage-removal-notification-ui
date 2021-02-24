@@ -1,7 +1,7 @@
 import { Mutations, Actions, Getters } from 'vuex'
 import { S, G, M, A } from '~/store/users/type'
 import firebase from '@/plugins/firebase'
-import { Garbage } from '@/types/models'
+import { Garbage, Document } from '@/types/models'
 
 const userCollection = firebase.firestore().collection('users')
 
@@ -39,13 +39,20 @@ export const actions: Actions<S, A, G, M> = {
     commit('setUid', uid)
     const res = await userCollection.doc(uid).get()
     const obj: any = res.data()
-    commit('setGarbageList', obj.days)
-    commit('setIsNotificated', obj.isNotificated)
+    if (obj !== void 0) {
+      commit('setGarbageList', obj.days)
+      commit('setIsNotificated', obj.isNotificated)
+    }
   },
   async updateIsNotificated ({ commit, state }, bool: boolean) {
     await userCollection.doc(state.uid).update({
       isNotificated: bool
     })
     commit('setIsNotificated', bool)
+  },
+  async setData ({ state, commit }, payload: Document) {
+    commit('setGarbageList', payload.days)
+    commit('setIsNotificated', payload.isNotificated)
+    await userCollection.doc(state.uid).set(payload)
   }
 }

@@ -36,11 +36,11 @@
           :class="i !== 0 ? 'border-t' : ''"
         >
           <div class="flex items-center text-black">
-            <div class="border-r border-black h-20 flex items-center px-1 font-semibold">
+            <div class="border-r border-black h-20 flex items-center px-1 font-semibold w-60px">
               {{ weekdayList[i] }} 
             </div>
-            <div class="ml-2">
-              {{ item.garbage }}
+            <div class="ml-2 w-100">
+              {{ item.str }}
             </div>
           </div>
           <div class="h-20 flex items-center border-l border-black w-20 justify-center">
@@ -48,7 +48,7 @@
               text="編集"
               height="h-8"
               class="w-16 text-sm"
-              @onClick="editGarbage(item.weekday)"
+              @onClick="openNotificationModal(item, i)"
             />
           </div>
         </div>
@@ -60,6 +60,13 @@
       @close="showNotificateModal = false"
       @updateNotificate="updateNotificate()"
     />
+    <UpdateNotificationModal
+      v-if="showUpdateNotificationModal"
+      :garbage="garbage"
+      :weekday="weekdayList[index]"
+      @close="showUpdateNotificationModal = false"
+      @editGarbage="editGarbage"
+    />
   </div>
 </template>
 
@@ -69,7 +76,7 @@ import BaseModal from '@/components/BaseModal.vue'
 import BaseButton from '@/components/BaseButton.vue'
 import TheConfirmationModal from '@/components/TheConfirmationModal.vue'
 import TheLoader from '@/components/TheLoader.vue'
-import { Garbage } from '@/types/models'
+import { Garbage, Document } from '@/types/models'
 import { cloneDeep } from 'lodash'
 
 @Component({
@@ -84,9 +91,11 @@ export default class index extends Vue {
   isLogin: boolean = false
   isLoading: boolean = true
   showNotificateModal: boolean = false
+  showUpdateNotificationModal: boolean = false
   garbageList: Garbage[] = []
+  garbage: Garbage = {} as Garbage
+  index: number = 0
   weekdayList: string[] = ['月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日', '日曜日']
-  selectList: string[] = ['生ゴミ', '資源ゴミ', 'ペットボトル', '缶', 'ビン', 'ダンボール']
 
   created () {
     this.initGarbageList()
@@ -107,6 +116,12 @@ export default class index extends Vue {
       const res = this.$store.getters['users/getGarbageList']
       if (res.length === 7) {
         this.garbageList = cloneDeep(res)
+      } else {
+        const payload: Document = {
+          days: this.garbageList,
+          isNotificated: true
+        }
+        await this.$store.dispatch('users/setData', payload)
       }
     }
     this.isLoading = false
@@ -120,7 +135,7 @@ export default class index extends Vue {
     const list: string[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
     list.forEach((item: string) => {
       const garbage: Garbage = {
-        garbage: '',
+        str: '',
         weekday: item
       }
       this.garbageList.push(garbage)
@@ -132,8 +147,27 @@ export default class index extends Vue {
     this.$router.push('/login')
   }
 
-  editGarbage (weekday: string) {
-    console.log(weekday, 'test')
+  async editGarbage (garbage: Garbage) {
+    const list = cloneDeep(this.garbageList)
+    list.forEach(item => {
+      if (item.weekday === garbage.weekday) {
+        item.str = garbage.str
+      }
+    })
+    const payload: Document = {
+      days: list,
+      isNotificated: this.isNotificated
+    }
+    await this.$store.dispatch('users/setData', payload)
+    this.garbage = {} as Garbage
+    this.showUpdateNotificationModal = false
+    this.garbageList = cloneDeep(list)
+  }
+
+  openNotificationModal (payload: Garbage, i: number) {
+    this.garbage = payload
+    this.index = i
+    this.showUpdateNotificationModal = true
   }
 
   async updateNotificate () {
@@ -142,3 +176,17 @@ export default class index extends Vue {
   }
 }
 </script>
+
+<style scoped>
+.w-60px {
+  width: 60px;
+}
+.box-str {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.w-100 {
+  width: calc(52vh - 148px);
+}
+</style>
