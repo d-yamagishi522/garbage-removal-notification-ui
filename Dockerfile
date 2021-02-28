@@ -1,5 +1,5 @@
 FROM node:14.4.0-alpine
-WORKDIR app
+WORKDIR web
 COPY . .
 
 ARG FIREBASE_API_KEY
@@ -12,7 +12,7 @@ ARG FIREBASE_APP_ID
 ARG FIREBASE_MEASUREMENT_ID
 ARG LIFF_ID
 
-ENV HOME=/app \
+ENV HOME=/web \
     LANG=C.UTF-8 \
     TZ=Asia/Tokyo \
     HOST=0.0.0.0  \
