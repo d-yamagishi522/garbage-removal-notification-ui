@@ -11,6 +11,8 @@
     "lint": "yarn lint:js"
   },
   "dependencies": {
+    "@nuxt/types": "^2.14.12",
+    "@nuxt/typescript-build": "^2.0.4",
     "@line/liff": "^2.8.0",
     "@nuxt/typescript-runtime": "^2.0.1",
     "core-js": "^3.8.3",
