@@ -1,3 +1,7 @@
+FROM node:12-alpine
+WORKDIR /app
+COPY . .
+
 # yarn run build (= nuxt build) 時にのみ必要なビルド変数
 ARG FIREBASE_API_KEY
 ARG FIREBASE_AUTH_DOMAIN
