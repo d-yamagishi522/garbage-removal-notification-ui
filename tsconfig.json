@@ -23,7 +23,8 @@
       ],
       "@/*": [
         "./*"
-      ]
+      ],
+      "vuex": ["./types/shims-vuex-type.d.ts"]
     },
     "types": [
       "@nuxt/types",

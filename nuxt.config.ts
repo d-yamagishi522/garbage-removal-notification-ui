@@ -14,7 +14,7 @@ const config: NuxtConfig = {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
     ],
-    script: [{ src: 'https://static.line-scdn.net/liff/edge/2/sdk.js' }],
+    // script: [{ src: 'https://static.line-scdn.net/liff/edge/2/sdk.js', type: 'text/javascript' }],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
@@ -35,7 +35,8 @@ const config: NuxtConfig = {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: '@/plugins/firebase' }
+    { src: '@/plugins/firebase' },
+    { src: '@/plugins/liff', mode: 'client' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

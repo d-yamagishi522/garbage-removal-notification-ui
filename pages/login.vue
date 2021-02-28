@@ -21,20 +21,20 @@
 import { Vue, Component } from 'nuxt-property-decorator'
 import BaseButton from '@/components/BaseButton.vue'
 
+// window is not defined回避のため 要修正
+let liff: any = null
+if (process.browser) {
+  liff = require('@/plugins/liff').default
+}
+
 @Component({
   components: {
     BaseButton
   }
 })
 export default class login extends Vue {
-  mounted() {
-    if (!liff.id) {
-      liff.init({ liffId: process.env.liffId as string })
-    }
-  }
-
-  async login () {
-    await liff.login()
+  login () {
+    liff.login()
   }
 }
 </script>
