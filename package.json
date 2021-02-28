@@ -8,8 +8,7 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
-    "lint": "yarn lint:js",
-    "heroku-postbuild": "yarn run build"
+    "lint": "yarn lint:js"
   },
   "dependencies": {
     "@line/liff": "^2.8.0",
