@@ -79,6 +79,12 @@ import TheLoader from '@/components/TheLoader.vue'
 import { Garbage, Document } from '@/types/models'
 import { cloneDeep } from 'lodash'
 
+// window is not defined回避のため 要修正
+let liff: any = null
+if (process.browser) {
+  liff = require('@/plugins/liff').default
+}
+
 @Component({
   components: {
     BaseModal,
@@ -102,18 +108,14 @@ export default class index extends Vue {
   }
 
   async mounted() {
-    if (!liff.id) {
-      // liffの初期化
-      await liff.init({ liffId: process.env.liffId as string })
-    }
     if (!liff.isLoggedIn()) {
       // ログインしてない場合ログイン画面にリダイレクト
       this.$router.push('/login')
     } else {
       const context: any = await liff.getContext()
       const uid: string = context.userId
-      await this.$store.dispatch('users/fetchUser', uid)
-      const res = this.$store.getters['users/getGarbageList']
+      await (this as any).$store.dispatch('users/fetchUser', uid)
+      const res = (this as any).$store.getters['users/getGarbageList']
       if (res.length === 7) {
         this.garbageList = cloneDeep(res)
       } else {
@@ -121,14 +123,14 @@ export default class index extends Vue {
           days: this.garbageList,
           isNotificated: true
         }
-        await this.$store.dispatch('users/setData', payload)
+        await (this as any).$store.dispatch('users/setData', payload)
       }
     }
     this.isLoading = false
   }
 
   get isNotificated (): boolean {
-    return this.$store.getters['users/getIsNotificated']
+    return (this as any).$store.getters['users/getIsNotificated']
   }
 
   initGarbageList () {
@@ -158,7 +160,7 @@ export default class index extends Vue {
       days: list,
       isNotificated: this.isNotificated
     }
-    await this.$store.dispatch('users/setData', payload)
+    await (this as any).$store.dispatch('users/setData', payload)
     this.garbage = {} as Garbage
     this.showUpdateNotificationModal = false
     this.garbageList = cloneDeep(list)
@@ -171,7 +173,7 @@ export default class index extends Vue {
   }
 
   async updateNotificate () {
-    await this.$store.dispatch('users/updateIsNotificated', !this.isNotificated)
+    await (this as any).$store.dispatch('users/updateIsNotificated', !this.isNotificated)
     this.showNotificateModal = false
   }
 }

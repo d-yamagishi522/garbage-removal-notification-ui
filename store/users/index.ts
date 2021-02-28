@@ -50,7 +50,7 @@ export const actions: Actions<S, A, G, M> = {
     })
     commit('setIsNotificated', bool)
   },
-  async setData ({ state, commit }, payload: Document) {
+  async setData ({ commit, state }, payload: Document) {
     commit('setGarbageList', payload.days)
     commit('setIsNotificated', payload.isNotificated)
     await userCollection.doc(state.uid).set(payload)

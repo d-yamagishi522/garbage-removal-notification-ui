@@ -1,4 +1,4 @@
-import { Garbage } from '@/types/models'
+import { Garbage, Document } from '@/types/models'
 
 export interface S {
   uid: string
@@ -17,18 +17,18 @@ export interface RG {
 }
 
 export interface M {
-  setGarbageList: void
-  setIsNotificated: void
-  setUid: void
+  setGarbageList: Garbage[]
+  setIsNotificated: boolean
+  setUid: string
 }
 
 export interface RM {
 }
 
 export interface A {
-  fetchUser: void
-  updateIsNotificated: void
-  setData: void
+  fetchUser: string
+  updateIsNotificated: boolean
+  setData: Document
 }
 
 export interface RA {
