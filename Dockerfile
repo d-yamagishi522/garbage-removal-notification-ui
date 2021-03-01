@@ -23,6 +23,6 @@ ENV HOME=/${WORKDIR} \
 RUN yarn install && yarn run build
 
 WORKDIR ${HOME}
-EXPOSE ${CONTAINER_PORT}
+EXPOSE ${PORT}
 
 ENTRYPOINT yarn run start
