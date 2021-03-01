@@ -1,7 +1,5 @@
 FROM node:14.4.0-alpine
 
-ARG WORKDIR
-ARG CONTAINER_PORT
 COPY . .
 
 ARG FIREBASE_API_KEY
@@ -14,7 +12,7 @@ ARG FIREBASE_APP_ID
 ARG FIREBASE_MEASUREMENT_ID
 ARG LIFF_ID
 
-ENV HOME=/${WORKDIR} \
+ENV HOME=/web \
     LANG=C.UTF-8 \
     TZ=Asia/Tokyo \
     HOST=0.0.0.0  \
@@ -23,7 +21,7 @@ ENV HOME=/${WORKDIR} \
 
 RUN yarn install && yarn run build
 
-WORKDIR ${HOME}
-EXPOSE ${PORT}
+WORKDIR web
+EXPOSE 3000
 
-ENTRYPOINT yarn run start
+CMD ["yarn", "run", "start"]
