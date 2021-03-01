@@ -1,4 +1,7 @@
-# yarn run build (= nuxt build) 時にのみ必要なビルド変数
+FROM node:14.4.0-alpine
+WORKDIR web
+COPY . .
+
 ARG FIREBASE_API_KEY
 ARG FIREBASE_AUTH_DOMAIN
 ARG FIREBASE_URL
@@ -9,12 +12,12 @@ ARG FIREBASE_APP_ID
 ARG FIREBASE_MEASUREMENT_ID
 ARG LIFF_ID
 
-ENV HOST 0.0.0.0
-ENV PORT 5000
+ENV HOME=/web \
+    LANG=C.UTF-8 \
+    TZ=Asia/Tokyo \
+    HOST=0.0.0.0  \
+    NPM_CONFIG_PRODUCTION=false
 
-# インストール
 RUN yarn install && yarn run build
 
-# 起動
-EXPOSE 5000
-ENTRYPOINT yarn run start
+EXPOSE 3000
