@@ -1,20 +1,22 @@
-# ui
+# ゴミ出し通知bot管理画面
 
-## Build Setup
+## 概要
 
-```bash
-# install dependencies
-$ yarn install
+リンク: https://grn-line.herokuapp.com/
 
-# serve with hot reload at localhost:3000
-$ yarn dev
+毎朝通知する内容を設定する管理アプリケーション
 
-# build for production and launch server
-$ yarn build
-$ yarn start
+## 開発環境
 
-# generate static project
-$ yarn generate
+1. `mkcert localhost`で証明書を発行
+2. 以下の内容を`nuxt.config.ts`に追記
+3. `https://localhost:3000`で開発を行う
+
 ```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+server: {
+   https: {
+     key: fs.readFileSync(path.resolve(__dirname, 'localhost-key.pem')),
+     cert: fs.readFileSync(path.resolve(__dirname, 'localhost.pem'))
+   }
+ }
+ ```
