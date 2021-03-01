@@ -18,7 +18,8 @@ ENV HOME=/${WORKDIR} \
     LANG=C.UTF-8 \
     TZ=Asia/Tokyo \
     HOST=0.0.0.0  \
-    NPM_CONFIG_PRODUCTION=false
+    NPM_CONFIG_PRODUCTION=false  \
+    PORT=${PORT}
 
 RUN yarn install && yarn run build
 
