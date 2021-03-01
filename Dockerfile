@@ -1,5 +1,7 @@
 FROM node:14.4.0-alpine
-WORKDIR web
+
+ARG WORKDIR
+ARG CONTAINER_PORT
 COPY . .
 
 ARG FIREBASE_API_KEY
@@ -12,12 +14,15 @@ ARG FIREBASE_APP_ID
 ARG FIREBASE_MEASUREMENT_ID
 ARG LIFF_ID
 
-ENV HOME=/web \
+ENV HOME=/${WORKDIR} \
     LANG=C.UTF-8 \
     TZ=Asia/Tokyo \
     HOST=0.0.0.0  \
     NPM_CONFIG_PRODUCTION=false
 
 RUN yarn install && yarn run build
+
+WORKDIR ${HOME}
+EXPOSE ${CONTAINER_PORT}
 
 ENTRYPOINT yarn run start
