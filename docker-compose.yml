@@ -1,8 +1,0 @@
-services:
-  web:
-    build: .
-    ports:
-      - $PORT:$PORT
-    env_file: .env
-    volumes:
-      - ./webapp:/opt/webapp

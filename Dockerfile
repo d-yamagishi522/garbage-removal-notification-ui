@@ -20,4 +20,4 @@ ENV HOME=/web \
 
 RUN yarn install && yarn run build
 
-EXPOSE ${PORT}
+ENTRYPOINT yarn run start
