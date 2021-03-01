@@ -20,4 +20,4 @@ ENV HOME=/web \
 
 RUN yarn install && yarn run build
 
-EXPOSE 3000
+EXPOSE ${PORT}

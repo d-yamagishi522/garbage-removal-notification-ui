@@ -2,7 +2,7 @@ services:
   web:
     build: .
     ports:
-      - "3000:3000"
+      - $PORT:$PORT
     env_file: .env
     volumes:
       - ./webapp:/opt/webapp
