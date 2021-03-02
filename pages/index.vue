@@ -109,7 +109,7 @@ export default class index extends Vue {
 
   async mounted() {
     if (!liff.isLoggedIn()) {
-      // 5秒遅延
+      // 1秒遅延
       await this.delayTime(1)
     }
     // ログイン直後だとステータスを正常に取得できないため5秒後に再度チェック
