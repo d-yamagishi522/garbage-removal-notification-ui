@@ -1,5 +1,5 @@
 <template>
-  <div class="height pb-40 pt-40">
+  <div class="height pt-40">
       <div class="text-center font-bold text-2xl text-black">
         ゴミ出し通知botの管理画面
       </div>
@@ -14,6 +14,9 @@
         >
         </BaseButton>
       </div>
+      <div class="text-black text-center mt-8 underline">
+        <a @click="$router.push('/sample')">サンプル画面に遷移</a>
+      </div>
     </div>
 </template>
 
@@ -22,10 +25,10 @@ import { Vue, Component } from 'nuxt-property-decorator'
 import BaseButton from '@/components/BaseButton.vue'
 
 // window is not defined回避のため 要修正
-let liff: any = null
-if (process.browser) {
-  liff = require('@/plugins/liff').default
-}
+// let liff: any = null
+// if (process.browser) {
+//   liff = require('@/plugins/liff').default
+// }
 
 @Component({
   components: {
@@ -34,7 +37,7 @@ if (process.browser) {
 })
 export default class login extends Vue {
   login () {
-    liff.login()
+    // liff.login()
   }
 }
 </script>
