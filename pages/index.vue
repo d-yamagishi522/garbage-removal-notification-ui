@@ -120,7 +120,7 @@ export default class index extends Vue {
       const context: any = await liff.getContext()
       const uid: string = context.userId
       await (this as any).$store.dispatch('users/fetchUser', uid)
-      const res = (this as any).$store.getters['users/getGarbageList']
+      const res: Garbage[] = (this as any).$store.getters['users/getGarbageList']
       if (res.length === 7) {
         this.garbageList = cloneDeep(res)
       } else {
@@ -163,8 +163,8 @@ export default class index extends Vue {
   }
 
   async editGarbage (garbage: Garbage) {
-    const list = cloneDeep(this.garbageList)
-    list.forEach(item => {
+    const list: Garbage[] = cloneDeep(this.garbageList)
+    list.forEach((item: Garbage)=> {
       if (item.weekday === garbage.weekday) {
         item.str = garbage.str
       }
