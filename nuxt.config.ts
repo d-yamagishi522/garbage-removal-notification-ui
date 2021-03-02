@@ -3,7 +3,7 @@ import { NuxtConfig } from '@nuxt/types'
 const config: NuxtConfig = {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'ui',
+    title: 'ゴミ出し通知bot管理画面',
     htmlAttrs: {
       lang: 'en',
     },
