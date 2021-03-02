@@ -3,7 +3,7 @@
       <div class="text-center font-bold text-2xl text-black">
         ゴミ出し通知botの管理画面
       </div>
-      <div class="login-content-height p-8 text-black">
+      <div class="login-content-height p-8 text-black text-center">
         ログインしたラインユーザーに設定したメッセージを送信します。
       </div>
       <div class="flex justify-center">
@@ -39,7 +39,6 @@ export default class login extends Vue {
 }
 </script>
 
-414141
 <style scoped>
 .height {
   height: 100vh;

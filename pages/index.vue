@@ -109,6 +109,11 @@ export default class index extends Vue {
 
   async mounted() {
     if (!liff.isLoggedIn()) {
+      // 5秒遅延
+      await this.delayTime(5)
+    }
+    // ログイン直後だとステータスを正常に取得できないため5秒後に再度チェック
+    if (!liff.isLoggedIn()) {
       // ログインしてない場合ログイン画面にリダイレクト
       this.$router.push('/login')
     } else {
@@ -141,6 +146,14 @@ export default class index extends Vue {
         weekday: item
       }
       this.garbageList.push(garbage)
+    })
+  }
+
+  delayTime (s: number) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve(() => {})
+      }, s * 1000)
     })
   }
 
