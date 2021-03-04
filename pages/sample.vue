@@ -2,7 +2,7 @@
   <div>
     <TheHeader
       text="ログアウト"
-      @headerButton="logout()"
+      @headerButton="$router.push('/login')"
     />
     <div class="mx-2 mt-1">
       <div>

@@ -25,10 +25,10 @@ import { Vue, Component } from 'nuxt-property-decorator'
 import BaseButton from '@/components/BaseButton.vue'
 
 // window is not defined回避のため 要修正
-// let liff: any = null
-// if (process.browser) {
-//   liff = require('@/plugins/liff').default
-// }
+let liff: any = null
+if (process.browser) {
+  liff = require('@/plugins/liff').default
+}
 
 @Component({
   components: {
@@ -37,7 +37,7 @@ import BaseButton from '@/components/BaseButton.vue'
 })
 export default class login extends Vue {
   login () {
-    // liff.login()
+    liff.login()
   }
 }
 </script>
