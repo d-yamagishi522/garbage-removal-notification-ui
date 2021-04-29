@@ -1,4 +1,4 @@
-import 'vuex'
+import '@/node_modules/vuex/types/index'
 import * as Users from '@/store/users/type'
 
 type RootState = {

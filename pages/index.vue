@@ -119,8 +119,8 @@ export default class index extends Vue {
     } else {
       const context: any = await liff.getContext()
       const uid: string = context.userId
-      await (this as any).$store.dispatch('users/fetchUser', uid)
-      const res: Garbage[] = (this as any).$store.getters['users/getGarbageList']
+      await this.$store.dispatch('users/fetchUser', uid)
+      const res: Garbage[] = this.$store.getters['users/getGarbageList']
       if (res.length === 7) {
         this.garbageList = cloneDeep(res)
       } else {
@@ -128,14 +128,14 @@ export default class index extends Vue {
           days: this.garbageList,
           isNotificated: true
         }
-        await (this as any).$store.dispatch('users/setData', payload)
+        await this.$store.dispatch('users/setData', payload)
       }
     }
     this.isLoading = false
   }
 
   get isNotificated (): boolean {
-    return (this as any).$store.getters['users/getIsNotificated']
+    return this.$store.getters['users/getIsNotificated']
   }
 
   initGarbageList () {
@@ -173,7 +173,7 @@ export default class index extends Vue {
       days: list,
       isNotificated: this.isNotificated
     }
-    await (this as any).$store.dispatch('users/setData', payload)
+    await this.$store.dispatch('users/setData', payload)
     this.garbage = {} as Garbage
     this.showUpdateNotificationModal = false
     this.garbageList = cloneDeep(list)
@@ -186,7 +186,7 @@ export default class index extends Vue {
   }
 
   async updateNotificate () {
-    await (this as any).$store.dispatch('users/updateIsNotificated', !this.isNotificated)
+    await this.$store.dispatch('users/updateIsNotificated', !this.isNotificated)
     this.showNotificateModal = false
   }
 }
